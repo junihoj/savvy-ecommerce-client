@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useCallback } from 'react';
 const useApiService = ()=>{
-    const apiUrl = process.env.API_SERVER || 'http://localhost:8000/api';
+    const apiUrl = process.env.REACT_APP_API_SERVER || 'http://localhost:8000/api';
     const globalAxios = axios.create({
         baseURL: apiUrl,
     });
