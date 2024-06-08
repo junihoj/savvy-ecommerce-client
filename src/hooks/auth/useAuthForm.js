@@ -3,10 +3,11 @@ import * as Yup from 'yup';
 import useApiService from "../api/use-api-service";
 import { useCallback, useState } from "react";
 import { requestIsSuccessful } from "../../utils";
-import { notifySuccessFxn } from "../../utils/toast-fnc";
+import { notifyErrorFxn, notifySuccessFxn } from "../../utils/toast-fnc";
 import {useNavigate} from 'react-router-dom';
 const useAuthForm = ({isSignup=true}) => {
     const navigate = useNavigate();
+    const [errorMessage, setErrorMessage] = useState("")
     const [isSucess, setIsSuccess] = useState(false)
     const {sendRequest} = useApiService();
     const validationSchema = Yup.object().shape({
@@ -38,6 +39,7 @@ const useAuthForm = ({isSignup=true}) => {
             setIsSuccess(true);
             notifySuccessFxn("Your Registration was successful");
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
 
     const handleSignin = useCallback(async (values)=>{
@@ -52,9 +54,11 @@ const useAuthForm = ({isSignup=true}) => {
             notifySuccessFxn("You have Signedin Successfully");
             navigate('/');
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
     const handleSubmit = async (values) => {
         console.log("FORM VALUES COMING THROUGH",values);
+        setErrorMessage("")
         try{
             if(isSignup){
                 await handleSignup(values);           
@@ -62,7 +66,10 @@ const useAuthForm = ({isSignup=true}) => {
                 await handleSignin(values);
             }
         }catch(err){
-
+            if(err?.response?.data?.message){
+                setErrorMessage(err?.response?.data?.message)
+                notifyErrorFxn(`${err?.response?.data?.message}`)
+            }
         }
     }
 
@@ -88,7 +95,8 @@ const useAuthForm = ({isSignup=true}) => {
     return {
         formik,
         togglePasswordVisibility,
-        isSucess
+        isSucess,
+        errorMessage
     }
 }
 
