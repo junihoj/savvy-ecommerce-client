@@ -21,7 +21,7 @@ const Header = ({activeHeading}) => {
         setSearchData(filteredProducts);
     };
     window.addEventListener("scroll", ()=>{
-        if(window.screenY > 70){
+        if(window.scrollY > 70){
             setActive(true)
         }else{
             setActive(false)
@@ -82,9 +82,9 @@ const Header = ({activeHeading}) => {
             </div>
 
             <div className={`${active? "shadow-sm fixed top-0 z-10": null} transition hidden 800px:flex items-center justify-between w-full bg-[#3321c8] h-[70px]`}>
-                <div className={`${styles.section} relative ${styles.normalFlex} justify-between`}>
+                <div className={`${styles.section} relative ${styles.noramlFlex} justify-between`}>
                     {/* Categories */}
-                    <div>
+                    <div onClick={()=>setDropDown(!dropDown)}>
                         <div className="relative h-[60px] w-[270px] hidden 1000px:block">
                             <BiMenuAltLeft size={30} className='absolute top-3'/>
                             <button 
@@ -112,9 +112,11 @@ const Header = ({activeHeading}) => {
                         
                     </div>
                      {/* NAVITEMS */}
-                     <div className={`${styles.normalFlex}`}>
+                     <div className={`${styles.noramlFlex}`}>
                         <Navbar active={activeHeading}/>
                     </div>
+                    
+                    
                 </div>
             </div>
         </>
