@@ -28,7 +28,7 @@ export const deleteProductAsync = createAsyncThunk(
 );
 
 //get all products
-export const getAllProducts = createProductAsync(
+export const getAllProducts = createAsyncThunk(
     "product/getAllProducts",
     async ( _, { rejectWithValue,  }) => {
       try {

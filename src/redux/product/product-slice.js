@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
-import { createProductAsync } from './product-api';
+import { createProductAsync, deleteProductAsync, getAllProducts, getAllShopProduct } from './product-api';
 
 const initialState = {
     isLoading:true,
@@ -17,6 +17,17 @@ const ProductSlice = createSlice({
             state.isLoading = false;
             state.product = action.payload;
             state.success = true;
+        });
+        builder.addCase(getAllProducts.fulfilled, (state, action)=>{
+            state.isLoading = false;
+            state.allProducts = action.payload;
+        })
+        builder.addCase(deleteProductAsync.fulfilled, (state, action)=>{
+            state.isLoading = false;
+        })
+        builder.addCase(getAllShopProduct.fulfilled, (state, action)=>{
+            state.isLoading = false;
+            state.products = action.payload;
         })
     }
 })
