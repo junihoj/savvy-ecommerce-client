@@ -42,7 +42,7 @@ export const getAllProducts = createAsyncThunk(
 
 // get All Product of a shop
 export const getAllShopProduct = createAsyncThunk(
-    "product/getAllProducts",
+    "product/getAllShopProduct",
     async ( id, { rejectWithValue,  }) => {
       try {
         const response = await productRequest.getAllProducts();
