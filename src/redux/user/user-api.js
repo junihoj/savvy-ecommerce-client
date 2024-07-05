@@ -12,3 +12,15 @@ export const getUserAsync = createAsyncThunk(
       }
     }
 );
+
+export const loginUserAsync = createAsyncThunk(
+  "user/loginUser",
+  async (data, { rejectWithValue, dispatch }) => {
+    try {
+      const response = await userRequest.loginUser(data);
+      return response.data;
+    } catch (err) {
+      rejectWithValue(err);
+    }
+  }
+);

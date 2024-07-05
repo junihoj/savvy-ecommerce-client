@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
-import { getUserAsync } from './user-api';
+import { getUserAsync, loginUserAsync } from './user-api';
 
 
 const initialState = {
@@ -33,10 +33,14 @@ const userSlice = createSlice({
             state.isAuthenticated = false;
         })
         builder.addCase(getUserAsync.fulfilled, (state, action)=>{
-            state.isAuthenticated = true;
             if(action?.payload?.data?.user){
+                state.isAuthenticated = true;
                 state.user = action.payload.data.user
             }
+        })
+        builder.addCase(loginUserAsync.fulfilled, (state, action)=>{
+            state.isAuthenticated = true;
+            state.user = action.payload
         })
     }
     // {

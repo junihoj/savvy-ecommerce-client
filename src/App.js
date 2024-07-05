@@ -1,7 +1,7 @@
 import './App.css';
 import 'react-toastify/dist/ReactToastify.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import {HomePage, LoginPage, SignupPage} from "../src/routes";
+import {HomePage, LoginPage, ProductDetailsPage, SignupPage} from "./routes";
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
@@ -19,12 +19,15 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        
+        {/* Auth */}
         <Route path='/signin' element={<LoginPage />}/>
         <Route path='/signup' element={<SignupPage />} />
         <Route path='/activation/:activation_token' element={<ActivationPage />}/>
+
         <Route path='/' element={<HomePage />}/>
         <Route path='test' element={<TestComponent />}/>
+        {/* PRODUCT ROUTES */}
+        <Route path="/product/:id" element={<ProductDetailsPage />} />
       </Routes>
       <ToastContainer
           position="top-right"

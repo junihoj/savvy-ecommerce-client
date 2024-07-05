@@ -5,6 +5,7 @@ import Categories from './Categories';
 import BestDeals from './BestDeals';
 import Sponsored from './Sponsored';
 import Footer from '../../components/layout/Footer';
+import Events from './events/Events';
 
 const Home = () => {
   return (
@@ -13,6 +14,7 @@ const Home = () => {
       <Hero />
       <Categories />
       <BestDeals />
+      <Events />
       <Sponsored />
       <Footer />
     </div>

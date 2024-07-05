@@ -1,10 +1,10 @@
 import React from "react";
-import CountDown from "./CountDown";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { addTocart } from "../../redux/actions/cart";
+import { addToCart } from "../../../redux/cart/cart-slice";
 import { toast } from "react-toastify";
 import styles from "../../../styles/styles";
+import CountDown from "../../../components/count-down/CountDown";
 
 const EventCard = ({ active, data }) => {
   const { cart } = useSelector((state) => state.cart);
@@ -19,7 +19,7 @@ const EventCard = ({ active, data }) => {
         toast.error("Product stock limited!");
       } else {
         const cartData = { ...data, qty: 1 };
-        dispatch(addTocart(cartData));
+        dispatch(addToCart(cartData));
         toast.success("Item added to cart successfully!");
       }
     }

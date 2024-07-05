@@ -17,8 +17,8 @@ import { addToWishList, removeFromWishlist } from "../../redux/wishlist/wishlist
 import { addToCart } from "../../redux/cart/cart-slice";
 
 const ProductCard = ({ data,isEvent }) => {
-  const { wishlist } = useSelector((state) => state.wishlist);
-  const { cart } = useSelector((state) => state.cart);
+  const wishlist  = useSelector((state) => state.wishlist);
+  const cart  = useSelector((state) => state.cart);
   const [click, setClick] = useState(false);
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
@@ -63,7 +63,7 @@ const ProductCard = ({ data,isEvent }) => {
         <div className="flex justify-end"></div>
         <Link to={`${isEvent === true ? `/product/${data._id}?isEvent=true` : `/product/${data._id}`}`}>
           <img
-            src={`${data.images && data.images[0]?.url}`}
+            src={`${data.image_Url && data.image_Url[0]?.url}`}
             alt=""
             className="w-full h-[170px] object-contain"
           />

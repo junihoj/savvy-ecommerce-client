@@ -8,7 +8,7 @@ const Navbar = ({active}) => {
     <div className={`${styles.noramlFlex}`}>
         {
             navItems && navItems.map((item, index)=>(
-                <div className='flex'>
+                <div className='flex' key={index}>
                     <Link 
                         to={item.url}
                         className={`${active===index + 1? "text-[#17dd1f]": "text-[#fff]"} font-[500] px-6 cursor-pointer`}

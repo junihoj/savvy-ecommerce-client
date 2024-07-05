@@ -5,7 +5,10 @@ import { useCallback, useState } from "react";
 import { requestIsSuccessful } from "../../utils";
 import { notifyErrorFxn, notifySuccessFxn } from "../../utils/toast-fnc";
 import {useNavigate} from 'react-router-dom';
+import { useDispatch } from "react-redux";
+import { loginUserAsync } from "../../redux/user/user-api";
 const useAuthForm = ({isSignup=true}) => {
+    const dispatch = useDispatch()
     const navigate = useNavigate();
     const [errorMessage, setErrorMessage] = useState("")
     const [isSucess, setIsSuccess] = useState(false)
@@ -47,8 +50,10 @@ const useAuthForm = ({isSignup=true}) => {
             email: values.email,
             password: values.password
         }
-        const response = await sendRequest({url: '/user/login-user', method:'post', data, otherConfig:{withCredentials:true}});
-        if(requestIsSuccessful(response)){
+        // const response = await sendRequest({url: '/user/login-user', method:'post', data, otherConfig:{withCredentials:true}});
+        dispatch(loginUserAsync(data))
+        // if(requestIsSuccessful(response)){
+        if(loginUserAsync.fulfilled){
             formik.resetForm();
             setIsSuccess(true);
             notifySuccessFxn("You have Signedin Successfully");
@@ -57,7 +62,6 @@ const useAuthForm = ({isSignup=true}) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
     const handleSubmit = async (values) => {
-        console.log("FORM VALUES COMING THROUGH",values);
         setErrorMessage("")
         try{
             if(isSignup){

@@ -1,8 +1,10 @@
 import {createSlice} from '@reduxjs/toolkit';
 import { createProductAsync, deleteProductAsync, getAllProducts, getAllShopProduct } from './product-api';
+import { productData } from '../../static/data';
 
 const initialState = {
     isLoading:true,
+    allProducts:productData
 }
 const ProductSlice = createSlice({
     name:'products',
